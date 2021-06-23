@@ -3,20 +3,20 @@ import Image from 'next/image'
 import styles from '../styles/login.module.scss'
 import Button from '../components/Button';
 import { useRouter } from 'next/router'
-import {auth, firebase} from '../services/firebase';
+import { UserContext, useUserContext } from '../contexts/UserContext';
+import { useContext } from 'react';
+
 
 export default function Login() {
 
     const router = useRouter();
+    const { user, signInWithGoogle } = useUserContext();
 
-    const handleCreateNewRoom = () =>{
-        const googleProvider = new firebase.auth.GoogleAuthProvider();
-
-        auth.signInWithPopup(googleProvider).then(res =>{
-            console.log(res);
-        })
-        
-       
+    const handleCreateNewRoom = () => {
+        if (!user) {
+            console.log(user);
+            signInWithGoogle()
+        }
     }
 
     return (
@@ -28,11 +28,12 @@ export default function Login() {
             </aside>
             <main>
                 <div className={styles.mainContent}>
+                    <h2>{user?.name}</h2>
                     <img src='/logo.svg' alt="Logo da Let me Ask" />
-                        <button className={styles.createRoom} onClick={handleCreateNewRoom}>
-                            <img src='/google-icon.svg' alt="Logo da Google" />
-                            Crie sua sala com o Google
-                        </button>
+                    <button className={styles.createRoom} onClick={handleCreateNewRoom}>
+                        <img src='/google-icon.svg' alt="Logo da Google" />
+                        Crie sua sala com o Google
+                    </button>
                     <span>Ou entre em uma sala</span>
                     <form>
                         <input

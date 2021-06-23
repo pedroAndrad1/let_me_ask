@@ -12,7 +12,18 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
-//Evita que tente inicializar mais de uma vez
+console.log(process.env.NEXT_PUBLIC_AUTH_DOMAIN);
+
+const firebaseConfig1 = {
+  apiKey: "AIzaSyAsiG2zT7ac70hps1V3_LPFQ9WnEXYdQso",
+  authDomain: "letmeask-84439.firebaseapp.com",
+  databaseURL: "https://letmeask-84439-default-rtdb.firebaseio.com",
+  projectId: "letmeask-84439",
+  storageBucket: "letmeask-84439.appspot.com",
+  messagingSenderId: "994365625268",
+  appId: "1:994365625268:web:15940250bfd10de74b98e1"
+};
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }

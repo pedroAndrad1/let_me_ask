@@ -12,9 +12,11 @@ export default function Login() {
     const handleCreateNewRoom = () =>{
         const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-        auth.signInWithPopup(googleProvider)
+        auth.signInWithPopup(googleProvider).then(res =>{
+            console.log(res);
+        })
         
-        //router.push('/new-room');
+       
     }
 
     return (

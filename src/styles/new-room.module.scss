@@ -1,0 +1,17 @@
+.new_room{
+    p{
+        font-size: 1rem;
+        color: var(--text);
+        margin-top: 1rem;
+
+        a{
+            color: var(--link);
+        }
+    }
+
+    h2{
+        font-size: 2rem;
+        margin: 4rem 0 2rem;
+        font-family: 'Poppins', sans-serif;
+    }
+}

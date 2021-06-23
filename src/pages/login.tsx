@@ -2,8 +2,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/login.module.scss'
 import Button from '../components/Button';
+import { useRouter } from 'next/router'
 
 export default function Login() {
+
+    const router = useRouter();
+
+    const moveToCreateNewRoom = () =>{
+        router.push('/new-room');
+    }
+
     return (
         <div className={styles.authContainer}>
             <aside>
@@ -14,10 +22,10 @@ export default function Login() {
             <main>
                 <div className={styles.mainContent}>
                     <img src='/logo.svg' alt="Logo da Let me Ask" />
-                    <button className={styles.createRoom}>
-                        <img src='/google-icon.svg' alt="Logo da Google" />
-                        Crie sua conta com o Google
-                    </button>
+                        <button className={styles.createRoom} onClick={moveToCreateNewRoom}>
+                            <img src='/google-icon.svg' alt="Logo da Google" />
+                            Crie sua sala com o Google
+                        </button>
                     <span>Ou entre em uma sala</span>
                     <form>
                         <input

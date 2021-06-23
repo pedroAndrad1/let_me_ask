@@ -1,0 +1,131 @@
+.authContainer{
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 0.75fr 1fr;
+
+    aside{
+        background: var(--purple-background);
+        color: var(--white-text);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        padding: 3rem;
+
+        strong{
+            font: 700 2rem 'Poppins', sans-serif;
+            line-height: 2rem;
+            margin-top: 1rem;
+            color: var(--white-text); 
+        }
+        
+        p{
+            font-size: 1rem;
+            line-height: 2rem;
+            margin-top: 1rem;
+            color: var(--white-text-fade); 
+        }
+
+        img{
+            max-width: 320px;
+            max-height: 320px;
+        }
+       
+    }  
+
+    main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        padding: 0 2rem;
+
+        .mainContent{
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+            
+            > img{
+                //Pra evitar da logo esticar
+                align-self: center;
+            }
+
+            .createRoom{
+                margin-top: 4rem;
+                height: 50px;
+                border-radius: 8px;
+                font-weight: 500;
+                background: #ea4335;
+                color: #FFF;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                cursor: pointer;
+                border: 0;
+
+                transition: filter 0.2s;
+
+                img{
+                    margin-right: .5rem;
+                }
+
+                &:hover{
+                    filter: brightness(.9);
+                }
+            }
+
+            form{
+                input{
+                    height: 50px;
+                    border-radius: .5rem;
+                    padding: 0 1rem;
+                    background: var(--input);
+                    border: 1px solid var(--input-border);
+                }
+
+                button{
+                    margin-top: 1rem;
+                }
+
+                button, input{
+                    width: 100%;
+                }
+            }
+
+            span{
+                display: flex;
+                align-items: center;
+
+                font-size: 1rem;
+                color: var(--separator);
+                margin: 2rem 0;
+
+                &::before{
+                    content: "";
+                    flex: 1;
+                    height: 1px;
+                    background: var(--separator);
+                    margin-right: 1rem;
+                }
+
+                &::after{
+                    content: "";
+                    flex: 1;
+                    height: 1px;
+                    background: var(--separator);
+                    margin-left: 1rem
+                }
+            }
+        }
+    }
+}

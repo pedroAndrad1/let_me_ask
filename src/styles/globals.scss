@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root{
+  --background:#f8f8f8;
+  --purple-background: #835afd;
+  --text-standard: #29292e;
+  --white-text: #FFF;
+  --white-text-fade:#f8;
+  --input: #FFF;
+  --input-border: #a8a8b3;
+  --separator: #a8a8b3;
+}
+
+body{
+  background: var(--background);
+  color: var(--text-standard);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body, input, button, textarea{
+  font: 400 1rem 'Roboto', sans-serif;
+} 

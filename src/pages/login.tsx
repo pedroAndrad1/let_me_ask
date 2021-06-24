@@ -12,11 +12,12 @@ export default function Login() {
     const router = useRouter();
     const { user, signInWithGoogle } = useUserContext();
 
-    const handleCreateNewRoom = () => {
+    const handleCreateNewRoom = async () => {
         if (!user) {
-            console.log(user);
-            signInWithGoogle()
+           await signInWithGoogle()
         }
+        //Se der erro no signIn, ele vai lançar uma exception e não vai chegar aqui 
+        router.push('/new-room');
     }
 
     return (

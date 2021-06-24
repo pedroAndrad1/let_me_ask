@@ -3,8 +3,36 @@ import styles_reaproveitado from '../styles/login.module.scss'
 import Button from '../components/Button';
 import styles from '../styles/new-room.module.scss'
 import Link from 'next/link';
+import {FormEvent, useState} from 'react';
+import { database } from '../services/firebase';
+import { useUserContext } from '../contexts/UserContext';
+import { useRouter } from "next/router";
 
 export default function NewRoom() {
+
+    const [roomName, setRoomName] = useState('');
+    const {user} = useUserContext();
+    const router = useRouter();
+
+    const handleNewRoomSubmit = async (event:FormEvent) => {
+        event.preventDefault();
+        //checando se foi escrito algo. Se tirar os espaços e nao tiver nada, entao nada escrito
+        if(roomName.trim() === '') {
+            return;
+        }
+        //Criando uma ref a uma categoria no firebase(RealTime - NoSQL). 
+        //Nessa categoria serao colocadas as salas com o id do autor e nome
+        const roomsRef = database.ref('rooms');
+        //Colocando a nova sala na categoria
+        const fireBaseRoom = await roomsRef.push({
+            title: roomName,
+            authorId: user?.id 
+        })
+
+        router.push(`rooms/${fireBaseRoom.key}`)
+
+    }
+
     return (
         <div className={`${styles_reaproveitado.authContainer} ${styles.new_room}`}>
             <aside>
@@ -16,10 +44,12 @@ export default function NewRoom() {
                 <div className={styles_reaproveitado.mainContent}>
                     <img src='/logo.svg' alt="Logo da Let me Ask" />
                     <h2>Crie uma nova sala</h2>
-                    <form>
+                    <form onSubmit={handleNewRoomSubmit}>
                         <input
                             type="text"
                             placeholder='Digite o código da sala'
+                            onChange={e => setRoomName(e.target.value)}
+                            value={roomName}
                         />
                         <Button type="submit">
                             Criar sala

@@ -52,7 +52,6 @@ export default function Login() {
             </aside>
             <main>
                 <div className={styles.mainContent}>
-                    <h2>{user?.name}</h2>
                     <img src='/logo.svg' alt="Logo da Let me Ask" />
                     <button className={styles.createRoom} onClick={handleCreateNewRoom}>
                         <img src='/google-icon.svg' alt="Logo da Google" />

@@ -4,13 +4,15 @@ import styles from '../styles/login.module.scss'
 import Button from '../components/Button';
 import { useRouter } from 'next/router'
 import { UserContext, useUserContext } from '../contexts/UserContext';
-import { useContext } from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { database } from '../services/firebase';
 
 
 export default function Login() {
 
     const router = useRouter();
     const { user, signInWithGoogle } = useUserContext();
+    const [roomCode, setRoomCode] = useState('');
 
     const handleCreateNewRoom = async () => {
         if (!user) {
@@ -18,6 +20,27 @@ export default function Login() {
         }
         //Se der erro no signIn, ele vai lançar uma exception e não vai chegar aqui 
         router.push('/new-room');
+    }
+
+    const handleAcessRoom = async (event: FormEvent) => {
+        event.preventDefault();
+        //checando se foi escrito algo. Se tirar os espaços e nao tiver nada, entao nada escrito
+        if(roomCode.trim() === '') {
+            return;
+        }
+        //checando se existe o registro dessa sala. 
+        //Referenciando a categoria rooms/ o documento com o codigo e pegando os dados
+        const roomRef = await database.ref(`rooms/${roomCode}`).get();
+        //Se nao tiver vindo alguma coisa, ou seja, se a sala nao existe
+        //termina aqui. Senao manda o user para a sala
+        if(!roomRef.exists()){
+            alert('sala nao existe');
+            return;
+        }
+
+        router.push(`rooms/${roomCode}`)
+
+
     }
 
     return (
@@ -36,10 +59,12 @@ export default function Login() {
                         Crie sua sala com o Google
                     </button>
                     <span>Ou entre em uma sala</span>
-                    <form>
+                    <form onSubmit={handleAcessRoom}>
                         <input
                             type="text"
                             placeholder='Digite o código da sala'
+                            onChange={e => setRoomCode(e.target.value)}
+                            value={roomCode}
                         />
                         <Button type="submit">
                             Entrar na sala

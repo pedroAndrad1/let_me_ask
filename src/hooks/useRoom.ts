@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useUserContext } from "../contexts/UserContext";
 import { database } from "../services/firebase";
 
 type FirabaseQuestion = Record<string, {
@@ -9,6 +10,9 @@ type FirabaseQuestion = Record<string, {
     content: string,
     isHighlighted: string,
     isAnswered: string,
+    likes: Record<string,{
+        authorId: string
+    }>
 }>
 
 interface Question{
@@ -20,11 +24,14 @@ interface Question{
     content: string,
     isHighlighted: string,
     isAnswered: string,
+    likeCount: number,
+    likeId: string | undefined
 }
 
 export function useRoom(roomId: string, title_initial?: string, questions_initial?: Question[] ){
     const [questions, setQuestions] = useState<Question[]>(questions_initial? questions_initial : null)
     const [title, setTitle] = useState(title_initial? title_initial : '');
+    const {user} = useUserContext();
 
     //Carrega as questions quando houver alguma mudança no id sala
     useEffect(() => {
@@ -43,6 +50,11 @@ export function useRoom(roomId: string, title_initial?: string, questions_initia
                     author: value.author,
                     isHighlighted: value.isHighlighted,
                     isAnswered: value.isAnswered,
+                    likeCount: Object.values(value.likes ?? {}).length,
+                    //Acha o Id do like. O entries retorna chave e valor, mas eu so quero o valor.
+                    //o ? esta ali pq pode nao achar nada e ai nao daria pra achar o posicao zero de null
+                    likeId: Object.entries(value.likes ?? {})
+                        .find( ([key, like]) => like.authorId == user?.id)?.[0]
                 }
             })
             setTitle(databaseRoom?.title);
@@ -54,7 +66,7 @@ export function useRoom(roomId: string, title_initial?: string, questions_initia
             roomRef.off();
         }
 
-    }, [roomId])
+    }, [roomId, user?.id])
 
     return{
         title,

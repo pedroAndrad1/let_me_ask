@@ -6,7 +6,5 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export default function Button({isOutlined = false, ...props}: ButtonProps){
-    console.log(isOutlined);
-
     return (<button {...props} className={`${styles.button} ${isOutlined && styles.outlined}`}></button>)
 }

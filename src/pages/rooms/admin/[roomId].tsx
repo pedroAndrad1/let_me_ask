@@ -35,36 +35,8 @@ export default function Room({ title_prop, questions_prop }) {
 
     const router = useRouter();
     const { roomId } = router.query;
-    const [question, setQuestion] = useState('');
     const { user } = useUserContext();
     const { title, questions } = useRoom(roomId as string, title_prop, questions_prop);
-
-
-
-    const handleNewQuestionSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        //checando se foi escrito algo. Se tirar os espaços e nao tiver nada, entao nada escrito
-        if (question.trim() === '') {
-            return;
-        }
-
-        if (!user) {
-            throw new Error("Você precisa estar logado")
-        }
-
-        const questionData = {
-            content: question,
-            author: {
-                name: user.name,
-                avatar: user.avatar
-            },
-            isHighlighted: false, //Se o admin marcou a question
-            isAnswered: false, //Se o admin respondeu
-        }
-
-        //Acessa uma categoria no catalogo de rooms (linguajar de ElasticSearch)
-        const firabaseQuestion = await database.ref(`rooms/${roomId}/questions`).push(questionData);
-    }
 
     return (
         <div className={styles.page_room}>

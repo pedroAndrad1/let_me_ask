@@ -35,5 +35,32 @@
                 font-size: 1rem;
             }
         }
+
+        button{
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+
+            //se tiver a classe like-button
+            &.like_button{
+                display: flex;
+                align-items: flex-end;
+                color: var(--text2);
+                gap: 8px;
+                transition: filter 0.2s;
+
+                &.liked{
+                    color: var(--purple-background);
+
+                    svg path{
+                        stroke: var(--purple-background);
+                    }
+                }
+
+                & :hover{
+                    filter: brightness(0.7);
+                }
+            }
+        }
     }
 }

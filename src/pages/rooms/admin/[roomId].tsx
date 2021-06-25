@@ -38,6 +38,12 @@ export default function Room({ title_prop, questions_prop }) {
     const { user } = useUserContext();
     const { title, questions } = useRoom(roomId as string, title_prop, questions_prop);
 
+    const handleDeleteQuestion = async (questionId: string) => {
+        if(window.confirm('Tem certeza que deseja remover essa pergunta?')){
+            await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+        }
+    }
+
     return (
         <div className={styles.page_room}>
             <header>
@@ -64,7 +70,14 @@ export default function Room({ title_prop, questions_prop }) {
                                 key={question.id}
                                 author={question.author}
                                 content={question.content}
-                            />
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => handleDeleteQuestion(question.id)}
+                                >
+                                    <img src="/delete.svg" alt="Remover pergunta"/>
+                                </button>
+                            </Question>
                         )
                     }
                 </div>

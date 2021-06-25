@@ -38,6 +38,11 @@ export default function Login() {
             return;
         }
 
+        if(roomRef.val().closedAt){
+            alert('A sala já foi fechada');
+            return;
+        }
+
         router.push(`rooms/${roomCode}`)
 
 

@@ -38,6 +38,14 @@ export default function Room({ title_prop, questions_prop }) {
     const { user } = useUserContext();
     const { title, questions } = useRoom(roomId as string, title_prop, questions_prop);
 
+    const handleCloseRoom = async () => {
+        await database.ref(`rooms/${roomId}`).update({
+            closedAt: new Date() 
+        })
+
+        router.push('/')
+    }
+
     const handleDeleteQuestion = async (questionId: string) => {
         if(window.confirm('Tem certeza que deseja remover essa pergunta?')){
             await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
@@ -51,7 +59,7 @@ export default function Room({ title_prop, questions_prop }) {
                     <img src="/logo.svg" alt="Let me ask" />
                     <div>
                         <RoomCode code={roomId as string} />
-                        <Button isOutlined>Encerrar sala</Button>
+                        <Button isOutlined onClick={handleCloseRoom}>Encerrar sala</Button>
                     </div>
                 </div>
             </header>

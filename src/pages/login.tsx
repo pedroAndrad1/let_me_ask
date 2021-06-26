@@ -1,10 +1,9 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/login.module.scss'
 import Button from '../components/Button';
 import { useRouter } from 'next/router'
-import { UserContext, useUserContext } from '../contexts/UserContext';
-import { FormEvent, useContext, useState } from 'react';
+import { useUserContext } from '../contexts/UserContext';
+import { FormEvent, useState } from 'react';
 import { database } from '../services/firebase';
 
 
@@ -50,6 +49,9 @@ export default function Login() {
 
     return (
         <div className={styles.authContainer}>
+            <Head>
+                <title>Let me ask | Home</title>
+            </Head>
             <aside>
                 <img src="/illustration.svg" alt="Ilustração simbolizando perguntas e respostas" />
                 <strong>Toda pergunta tem uma resposta</strong>

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import React, { FormEvent, useState, useEffect } from "react";
+import React, { FormEvent, useState } from "react";
 import Button from "../../components/Button";
 import RoomCode from '../../components/RoomCode';
 import { useUserContext } from "../../contexts/UserContext";
@@ -9,6 +9,7 @@ import { database } from "../../services/firebase";
 import styles from "../../styles/room.module.scss"
 import QuestionStyles from '../../components/Question/index.module.scss';
 import Question from './../../components/Question';
+import Head from 'next/head'
 
 type FirabaseQuestion = Record<string, {
     author: {
@@ -88,6 +89,9 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
     }
     return (
         <div className={styles.page_room}>
+            <Head>
+                <title>Let me ask | {roomId}</title>
+            </Head>
             <header>
                 <div className={styles.header_content}>
                     <img src="/logo.svg" alt="Let me ask" />

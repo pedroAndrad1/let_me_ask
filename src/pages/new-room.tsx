@@ -29,7 +29,7 @@ export default function NewRoom() {
             authorId: user?.id 
         })
 
-        router.push(`rooms/${fireBaseRoom.key}`)
+        router.push(`rooms/admin/${fireBaseRoom.key}`)
 
     }
 

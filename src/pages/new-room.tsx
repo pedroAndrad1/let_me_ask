@@ -47,7 +47,7 @@ export default function NewRoom() {
                     <form onSubmit={handleNewRoomSubmit}>
                         <input
                             type="text"
-                            placeholder='Digite o código da sala'
+                            placeholder='Digite o nome da sala'
                             onChange={e => setRoomName(e.target.value)}
                             value={roomName}
                         />

@@ -16,6 +16,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        height: 100%; //Conserta bug no CHROME
     }
 
     span{

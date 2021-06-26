@@ -38,7 +38,7 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
     const router = useRouter();
     const { roomId } = router.query;
     const [question, setQuestion] = useState('');
-    const { user } = useUserContext();
+    const { user, signInWithGoogle } = useUserContext();
     const { title, questions } = useRoom(roomId as string, title_prop, questions_prop);
 
 
@@ -84,6 +84,10 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
         router.push(`/rooms/admin/${roomId}`)
     }
 
+    const signIn = async () => {
+        await signInWithGoogle();
+    }
+
     const moveToHome = () => {
         router.push(`/`)
     }
@@ -126,7 +130,9 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
                                 <span>{user.name}</span>
                             </div>
                             :
-                            <span>Para enviar uma pergunta, <button>faça login</button>.</span>
+                            <span>Para enviar uma pergunta, 
+                                <button onClick={signIn}>faça login</button>
+                            .</span>
                         }
                         <Button type="submit" disabled={!user}>Enviar pergunta</Button>
                     </div>

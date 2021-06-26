@@ -25,6 +25,17 @@
                 }
             }
         }
+
+        @media(max-width: 600px){
+            .header_content{
+                flex-direction: column;
+
+                > div{
+                    flex-direction: column;
+                    margin-top: 1rem;
+                }
+            }
+        }
     }
 
     main{
@@ -132,5 +143,36 @@
 
             }
         }
+
+        @media(max-width: 600px){
+            
+            .room_title{
+                flex-direction: column;
+                
+                span{
+                    margin-top: 1rem;
+                }
+            }
+            
+            form{
+               padding: 1.5rem;
+            }
+
+            .question_list{
+                padding: 0 1rem;
+
+                .no_questions{
+                    p{
+                       text-align: center;
+                    }
+    
+                    span{
+                       text-align: center;
+                    }
+    
+                }
+            }
+        }
     }
+
 }

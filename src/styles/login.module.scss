@@ -4,6 +4,10 @@
     display: grid;
     grid-template-columns: 0.75fr 1fr;
 
+    @media(max-width: 600px){
+        grid-template-columns: 1fr;
+    }
+
     aside{
         background: var(--purple-background);
         color: var(--white-text);
@@ -33,7 +37,10 @@
             max-width: 320px;
             max-height: 320px;
         }
-       
+
+        @media(max-width: 600px){
+            display: none
+        }
     }  
 
     main{
@@ -127,5 +134,6 @@
                 }
             }
         }
+
     }
 }

@@ -9,6 +9,7 @@ import { database } from "../../../services/firebase";
 import styles from "../../../styles/room.module.scss";
 import Question from '../../../components/Question';
 import Head from 'next/head'
+import ToogleTheme from "../../../components/ToogleTheme";
 
 type FirabaseQuestion = Record<string, {
     author: {
@@ -80,7 +81,10 @@ export default function Room({ title_prop, questions_prop }) {
             </Head>
             <header>
                 <div className={styles.header_content}>
-                    <img src="/logo.svg" alt="Let me ask" />
+                    <div>
+                        <img src="/logo.svg" alt="Let me ask" />
+                        <ToogleTheme />
+                    </div>
                     <div>
                         <RoomCode code={roomId as string} />
                         <Button onClick={moveToStandardVision}> Visão padrão</Button>
@@ -100,44 +104,44 @@ export default function Room({ title_prop, questions_prop }) {
                 <div className={styles.question_list}>
                     {
                         questions.length == 0 ?
-                        <div className={styles.no_questions}>
-                            <img src="/empty-questions.svg" alt="Não há perguntas ainda" />
-                            <p>Nenhuma pergunta por aqui...</p>
-                            <span>Faça seu login e seja a primeira pessoa a fazer uma pergunta!</span>
-                        </div>
-                        :
-                        questions.map((question) =>
-                            <Question
-                                key={question.id}
-                                author={question.author}
-                                content={question.content}
-                                isAnswered={question.isAnswered}
-                                isHighlighted={question.isHighlighted}
-                            >
-                                {!question.isAnswered &&
-                                    <>
-                                        <button
-                                            type="button"
-                                            onClick={() => handleCheckQuestionAnswered(question.id)}
-                                        >
-                                            <img src="/check.svg" alt="Marcar pergunta como respondida" />
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => handleHighlightQuestion(question.id)}
-                                        >
-                                            <img src="/answer.svg" alt="Destacar pergunta" />
-                                        </button>
-                                    </>
-                                }
-                                <button
-                                    type="button"
-                                    onClick={() => handleDeleteQuestion(question.id)}
+                            <div className={styles.no_questions}>
+                                <img src="/empty-questions.svg" alt="Não há perguntas ainda" />
+                                <p>Nenhuma pergunta por aqui...</p>
+                                <span>Faça seu login e seja a primeira pessoa a fazer uma pergunta!</span>
+                            </div>
+                            :
+                            questions.map((question) =>
+                                <Question
+                                    key={question.id}
+                                    author={question.author}
+                                    content={question.content}
+                                    isAnswered={question.isAnswered}
+                                    isHighlighted={question.isHighlighted}
                                 >
-                                    <img src="/delete.svg" alt="Remover pergunta" />
-                                </button>
-                            </Question>
-                        )
+                                    {!question.isAnswered &&
+                                        <>
+                                            <button
+                                                type="button"
+                                                onClick={() => handleCheckQuestionAnswered(question.id)}
+                                            >
+                                                <img src="/check.svg" alt="Marcar pergunta como respondida" />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => handleHighlightQuestion(question.id)}
+                                            >
+                                                <img src="/answer.svg" alt="Destacar pergunta" />
+                                            </button>
+                                        </>
+                                    }
+                                    <button
+                                        type="button"
+                                        onClick={() => handleDeleteQuestion(question.id)}
+                                    >
+                                        <img src="/delete.svg" alt="Remover pergunta" />
+                                    </button>
+                                </Question>
+                            )
                     }
                 </div>
 

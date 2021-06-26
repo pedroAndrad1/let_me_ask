@@ -51,6 +51,8 @@
         
         padding: 0 2rem;
 
+        position: relative; //Para ajustar toogle_theme
+
         .mainContent{
             display: flex;
             flex-direction: column;
@@ -63,6 +65,12 @@
             > img{
                 //Pra evitar da logo esticar
                 align-self: center;
+            }
+
+            .toogle_theme{
+                position: absolute;
+                top: 20px;
+                right: 50px;
             }
 
             .createRoom{
@@ -98,6 +106,7 @@
                     padding: 0 1rem;
                     background: var(--input);
                     border: 1px solid var(--input-border);
+                    
                 }
 
                 button{

@@ -1,11 +1,14 @@
 import { UserContextProvider } from '../contexts/UserContext';
-import '../styles/globals.scss'
+import '../styles/globals.scss';
+import { ThemeProvider } from 'next-themes';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <UserContextProvider>
-      <Component {...pageProps} />
-    </UserContextProvider>
+    <ThemeProvider defaultTheme="system">
+      <UserContextProvider>
+        <Component {...pageProps} />
+      </UserContextProvider>
+    </ThemeProvider>
   )
 }
 

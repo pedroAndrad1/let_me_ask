@@ -7,6 +7,7 @@ import {FormEvent, useState} from 'react';
 import { database } from '../services/firebase';
 import { useUserContext } from '../contexts/UserContext';
 import { useRouter } from "next/router";
+import ToogleTheme from '../components/ToogleTheme';
 
 export default function NewRoom() {
 
@@ -42,6 +43,7 @@ export default function NewRoom() {
             </aside>
             <main>
                 <div className={styles_reaproveitado.mainContent}>
+                    <ToogleTheme className={styles_reaproveitado.toogle_theme}/>
                     <img src='/logo.svg' alt="Logo da Let me Ask" />
                     <h2>Crie uma nova sala</h2>
                     <form onSubmit={handleNewRoomSubmit}>

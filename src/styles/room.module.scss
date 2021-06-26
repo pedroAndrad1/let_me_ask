@@ -12,8 +12,14 @@
             justify-content: space-between;
             align-items: center;
 
-            > img{
-                max-height: 45px;
+            .logo_and_theme{
+
+                display: flex;
+                align-items: center;
+
+                img{
+                    max-height: 45px;
+                }
             }
 
             > div{
@@ -29,6 +35,17 @@
         @media(max-width: 600px){
             .header_content{
                 flex-direction: column;
+
+                .logo_and_theme{
+
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column-reverse;
+    
+                    img{
+                        max-height: 45px;
+                    }
+                }
 
                 > div{
                     flex-direction: column;

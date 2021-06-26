@@ -20,6 +20,25 @@
   --text-area: #fefefe;
   --highlighted: #F4F0FF;
   --answered: #DBDCDD;
+  --question-background: #fefefe;
+  --question-button: #737380;
+}
+
+[data-theme='dark']{
+  --background: #494D4B;
+  --purple-background: #4d0099;
+  --text-standard: #FFF;
+  --text2:#E6E8EB;
+  --text:#E6E8EB;
+  --link:  #9907c5;
+  --input: #AFB2B1;
+  --separator: #F7F8FA;
+  --text-area: #AFB2B1;
+  --highlighted: #720594;
+  --answered: #400080;
+  --question-background: #a3a3a3;
+  --question-button: #000000;
+
 }
 
 body{

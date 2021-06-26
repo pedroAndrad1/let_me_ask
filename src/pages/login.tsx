@@ -3,8 +3,10 @@ import styles from '../styles/login.module.scss'
 import Button from '../components/Button';
 import { useRouter } from 'next/router'
 import { useUserContext } from '../contexts/UserContext';
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { database } from '../services/firebase';
+import ToogleTheme from '../components/ToogleTheme';
+import { useTheme } from 'next-themes';
 
 
 export default function Login() {
@@ -39,13 +41,13 @@ export default function Login() {
 
         if(roomRef.val().closedAt){
             alert('A sala já foi fechada');
+            setRoomCode('');
             return;
         }
 
         router.push(`rooms/${roomCode}`)
-
-
     }
+
 
     return (
         <div className={styles.authContainer}>
@@ -59,6 +61,7 @@ export default function Login() {
             </aside>
             <main>
                 <div className={styles.mainContent}>
+                    <ToogleTheme className={styles.toogle_theme}/>
                     <img src='/logo.svg' alt="Logo da Let me Ask" />
                     <button className={styles.createRoom} onClick={handleCreateNewRoom}>
                         <img src='/google-icon.svg' alt="Logo da Google" />

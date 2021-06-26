@@ -1,9 +1,9 @@
 .question{
-    background: var(--text-area);
+    background: var(--question-background);
     border-radius: 8px;
     box-shadow: 0 2px 12px  rgba(0, 0, 0, 0.04);
     padding: 24px;
-
+    
     & + .question{
         margin-top: 8px;
     }
@@ -60,11 +60,15 @@
             background: transparent;
             cursor: pointer;
 
+            svg path{
+                stroke: var(--question-button);
+            }
+
             //se tiver a classe like-button
             &.like_button{
                 display: flex;
                 align-items: flex-end;
-                color: var(--text2);
+                //color: var(--question-button);
                 gap: 8px;
                 transition: filter 0.2s;
 

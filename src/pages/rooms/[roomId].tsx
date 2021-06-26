@@ -10,6 +10,7 @@ import styles from "../../styles/room.module.scss"
 import QuestionStyles from '../../components/Question/index.module.scss';
 import Question from './../../components/Question';
 import Head from 'next/head'
+    import ToogleTheme from "../../components/ToogleTheme";
 
 type FirabaseQuestion = Record<string, {
     author: {
@@ -65,6 +66,9 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
 
         //Acessa uma categoria no catalogo de rooms (linguajar de ElasticSearch)
         const firabaseQuestion = await database.ref(`rooms/${roomId}/questions`).push(questionData);
+
+        //Limpa o campo de question
+        setQuestion('');
     }
 
     const handleNewLike = async (questionId: string, likeId: string | undefined) => {
@@ -98,7 +102,10 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
             </Head>
             <header>
                 <div className={styles.header_content}>
-                    <img src="/logo.svg" alt="Let me ask" />
+                    <div className={styles.logo_and_theme}>
+                        <img src="/logo.svg" alt="Let me ask" />
+                        <ToogleTheme />
+                    </div>
                     <div>
                         <RoomCode code={roomId as string} />
                         {
@@ -130,9 +137,9 @@ export default function Room({ title_prop, questions_prop, roomAuthorId }) {
                                 <span>{user.name}</span>
                             </div>
                             :
-                            <span>Para enviar uma pergunta, 
+                            <span>Para enviar uma pergunta,
                                 <button onClick={signIn}>faça login</button>
-                            .</span>
+                                .</span>
                         }
                         <Button type="submit" disabled={!user}>Enviar pergunta</Button>
                     </div>

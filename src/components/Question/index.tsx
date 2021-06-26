@@ -14,7 +14,7 @@ interface QuestionProps{
 
 export default function Question({content, author, isAnswered = false, isHighlighted = false, children}:
     QuestionProps,){
-    console.log(isAnswered, isHighlighted)
+  
     return(
         <div className={`
             ${styles.question} 

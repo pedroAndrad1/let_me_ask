@@ -65,6 +65,13 @@ export default function Room({ title_prop, questions_prop }) {
         });
     }
 
+    const moveToStandardVision = () => {
+        router.push(`/rooms/${roomId}`)
+    }
+
+    const moveToHome = () => {
+        router.push(`/`)
+    }
     return (
         <div className={styles.page_room}>
             <header>
@@ -72,6 +79,8 @@ export default function Room({ title_prop, questions_prop }) {
                     <img src="/logo.svg" alt="Let me ask" />
                     <div>
                         <RoomCode code={roomId as string} />
+                        <Button onClick={moveToStandardVision}> Visão padrão</Button>
+                        <Button onClick={moveToHome}>Sair da sala</Button>
                         <Button isOutlined onClick={handleCloseRoom}>Encerrar sala</Button>
                     </div>
                 </div>

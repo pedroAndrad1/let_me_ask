@@ -117,6 +117,11 @@ export default function Room({ title_prop, questions_prop }) {
 
                 <div className={styles.question_list}>
                     {
+                        questions.length == 0 ?
+                        <div>
+                            <img src="empty-questions.svg" alt="Não há perguntas ainda" />
+                        </div> 
+                        :
                         questions.map((question) =>
                             <Question
                                 key={question.id}

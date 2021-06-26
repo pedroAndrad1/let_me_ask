@@ -111,6 +111,26 @@
 
         .question_list{
             margin: 2rem 0;
+
+            .no_questions{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                p{
+                    margin-top: 1rem;
+                    font: 700 2rem 'Poppins', sans-serif;
+
+                    color: var(--text-standard);
+                }
+
+                span{
+                    margin-top: 1rem;
+                    color: var(--text2);
+                }
+
+            }
         }
     }
 }

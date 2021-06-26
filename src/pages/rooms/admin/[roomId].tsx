@@ -15,8 +15,8 @@ type FirabaseQuestion = Record<string, {
         avatar: string
     }
     content: string,
-    isHighlighted: string,
-    isAnswered: string,
+    isHighlighted: boolean,
+    isAnswered: boolean,
 }>
 
 interface Question {
@@ -26,8 +26,8 @@ interface Question {
         avatar: string
     }
     content: string,
-    isHighlighted: string,
-    isAnswered: string,
+    isHighlighted: boolean,
+    isAnswered: boolean,
 }
 
 
@@ -38,18 +38,31 @@ export default function Room({ title_prop, questions_prop }) {
     const { user } = useUserContext();
     const { title, questions } = useRoom(roomId as string, title_prop, questions_prop);
 
+
     const handleCloseRoom = async () => {
         await database.ref(`rooms/${roomId}`).update({
-            closedAt: new Date() 
+            closedAt: new Date()
         })
 
         router.push('/')
     }
 
     const handleDeleteQuestion = async (questionId: string) => {
-        if(window.confirm('Tem certeza que deseja remover essa pergunta?')){
+        if (window.confirm('Tem certeza que deseja remover essa pergunta?')) {
             await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
         }
+    }
+
+    const handleCheckQuestionAnswered = async (questionId: string) => {
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+            isAnswered: true
+        });
+    }
+
+    const handleHighlightQuestion = async (questionId: string) => {
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+            isHighlighted: true
+        });
     }
 
     return (
@@ -78,12 +91,30 @@ export default function Room({ title_prop, questions_prop }) {
                                 key={question.id}
                                 author={question.author}
                                 content={question.content}
+                                isAnswered={question.isAnswered}
+                                isHighlighted={question.isHighlighted}
                             >
+                                {!question.isAnswered &&
+                                    <>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleCheckQuestionAnswered(question.id)}
+                                        >
+                                            <img src="/check.svg" alt="Marcar pergunta como respondida" />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleHighlightQuestion(question.id)}
+                                        >
+                                            <img src="/answer.svg" alt="Destacar pergunta" />
+                                        </button>
+                                    </>
+                                }
                                 <button
                                     type="button"
                                     onClick={() => handleDeleteQuestion(question.id)}
                                 >
-                                    <img src="/delete.svg" alt="Remover pergunta"/>
+                                    <img src="/delete.svg" alt="Remover pergunta" />
                                 </button>
                             </Question>
                         )

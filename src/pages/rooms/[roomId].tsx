@@ -16,8 +16,8 @@ type FirabaseQuestion = Record<string, {
         avatar: string
     }
     content: string,
-    isHighlighted: string,
-    isAnswered: string,
+    isHighlighted: boolean,
+    isAnswered: boolean,
 }>
 
 interface Question {
@@ -27,8 +27,8 @@ interface Question {
         avatar: string
     }
     content: string,
-    isHighlighted: string,
-    isAnswered: string,
+    isHighlighted: boolean,
+    isAnswered: boolean,
 }
 
 
@@ -122,6 +122,8 @@ export default function Room({ title_prop, questions_prop }) {
                                 key={question.id}
                                 author={question.author}
                                 content={question.content}
+                                isAnswered={question.isAnswered}
+                                isHighlighted={question.isHighlighted}
                             >
                                 <button
                                     type="button"

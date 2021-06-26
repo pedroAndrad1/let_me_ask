@@ -8,8 +8,8 @@ type FirabaseQuestion = Record<string, {
         avatar: string
     }
     content: string,
-    isHighlighted: string,
-    isAnswered: string,
+    isHighlighted: boolean,
+    isAnswered: boolean,
     likes: Record<string,{
         authorId: string
     }>
@@ -22,8 +22,8 @@ interface Question{
         avatar: string
     }
     content: string,
-    isHighlighted: string,
-    isAnswered: string,
+    isHighlighted: boolean,
+    isAnswered: boolean,
     likeCount: number,
     likeId: string | undefined
 }
@@ -48,7 +48,7 @@ export function useRoom(roomId: string, title_initial?: string, questions_initia
                     id: key,
                     content: value.content,
                     author: value.author,
-                    isHighlighted: value.isHighlighted,
+                    isHighlighted: value.isHighlighted ,
                     isAnswered: value.isAnswered,
                     likeCount: Object.values(value.likes ?? {}).length,
                     //Acha o Id do like. O entries retorna chave e valor, mas eu so quero o valor.

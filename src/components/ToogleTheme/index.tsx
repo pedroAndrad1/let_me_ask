@@ -5,7 +5,6 @@ import styles from './toogle_theme.module.scss';
 export default function ToogleTheme(props: HTMLAttributes<HTMLDivElement>) {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
-    console.log('Tema', theme);
 
     // Como nao da pra saber o tema no server, e preciso garantir que o cliente esteja montado
     // com a info theme para poder mostrar a UI.
